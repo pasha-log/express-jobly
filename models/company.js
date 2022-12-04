@@ -23,7 +23,7 @@ class Company {
            WHERE handle = $1`,
         [handle]);
 
-    if (duplicateCheck.rows[0])
+    if (duplicateCheck.rows[0]) 
       throw new BadRequestError(`Duplicate company: ${handle}`);
 
     const result = await db.query(
