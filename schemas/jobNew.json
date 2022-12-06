@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "additionalProperties": false,
+    "required": [
+        "title",
+        "companyHandle"
+    ],
+    "properties": {
+        "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "title": "The title Schema",
+            "examples": [
+                "junior software developer"
+            ]
+        },
+        "salary": {
+            "type": "integer",
+            "minimum": 0,
+            "title": "The salary Schema",
+            "examples": [
+                90000
+            ]
+        },
+        "equity": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "title": "The equity Schema",
+            "pattern": "0|(0?\\.[0-9]+)",
+            "examples": [
+                0.0065
+            ]
+        },
+        "companyHandle": {
+            "type": "string",
+            "default": "",
+            "title": "The companyHandle Schema",
+            "examples": [
+                "anderson-arias-morrow"
+            ]
+        }
+    },
+    "examples": [{
+        "title": "junior software developer",
+        "salary": 90000,
+        "equity": 0.0065,
+        "companyHandle": "anderson-arias-morrow"
+    }]
+}
