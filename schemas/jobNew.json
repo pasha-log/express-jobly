@@ -49,7 +49,7 @@
     "examples": [{
         "title": "junior software developer",
         "salary": 90000,
-        "equity": 0.0065,
+        "equity": "0.0065",
         "companyHandle": "anderson-arias-morrow"
     }]
 }

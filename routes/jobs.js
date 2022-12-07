@@ -7,7 +7,7 @@ const express = require('express');
 
 const { BadRequestError } = require('../expressError');
 const { ensureAdmin } = require('../middleware/auth');
-const Job = require('../models/company');
+const Job = require('../models/job');
 
 const jobNewSchema = require('../schemas/jobNew.json');
 const jobUpdateSchema = require('../schemas/jobUpdate.json');
@@ -27,13 +27,18 @@ const router = new express.Router({ mergeParams: true });
 router.post('/', ensureAdmin, async function(req, res, next) {
 	try {
 		const validator = jsonschema.validate(req.body, jobNewSchema);
+		console.log(validator.valid);
 		if (!validator.valid) {
 			const errs = validator.errors.map((e) => e.stack);
 			throw new BadRequestError(errs);
 		}
-
-		const job = await Job.create(req.body);
-		return res.status(201).json({ job });
+		try {
+			const job = await Job.create(req.body);
+			return res.status(201).json({ job });
+		} catch (e) {
+			console.log("random")
+			console.log(e);
+		}
 	} catch (err) {
 		return next(err);
 	}
@@ -52,9 +57,9 @@ router.post('/', ensureAdmin, async function(req, res, next) {
 
 router.get('/', async function(req, res, next) {
 	const q = req.query;
-  // We want the minSalary to be an integer/boolean since it comes as string from query string
+	// We want the minSalary to be an integer/boolean since it comes as string from query string
 	if (q.minSalary !== undefined) q.minSalary = +q.minSalary;
-	q.hasEquity = q.hasEquity === "true";
+	q.hasEquity = q.hasEquity === 'true';
 
 	try {
 		const validator = jsonschema.validate(q, jobSearchSchema);

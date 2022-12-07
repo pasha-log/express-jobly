@@ -16,10 +16,10 @@ afterAll(commonAfterAll);
 
 describe('create', function() {
 	let newJob = {
+		companyHandle: 'c1',
 		title: 'new',
 		salary: 100000,
 		equity: '0',
-		companyHandle: 'c1'
 	};
 
 	test('works', async function() {
